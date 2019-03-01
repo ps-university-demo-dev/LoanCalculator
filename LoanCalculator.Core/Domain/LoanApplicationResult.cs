@@ -9,7 +9,17 @@ namespace LoanCalculator.Core.Domain
 
         public int ResultId { get; set; }
 
-        public LoanApplication LoanApplication { get; private set; }
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
+
+        public int AnnualIncome { get; set; }
+
+        public int CreditScore { get; set; }
+
+        public double LoanAmount { get; set; }
+
+        public int LoanTerm { get; set; }
 
         public Boolean Approved { get; private set; }
 
@@ -25,7 +35,12 @@ namespace LoanCalculator.Core.Domain
         {
             return new LoanApplicationResult()
             {
-                LoanApplication = application,
+                FirstName = application.Person.FirstName,
+                LastName = application.Person.LastName,
+                AnnualIncome = application.Person.AnnualIncome,
+                CreditScore = application.Person.CreditScore,
+                LoanAmount = application.LoanAmount,
+                LoanTerm = application.Term.Years,
                 Approved = false,
                 DenialReason = denialReason
             };
@@ -36,7 +51,12 @@ namespace LoanCalculator.Core.Domain
         {
             return new LoanApplicationResult()
             {
-                LoanApplication = application,
+                FirstName = application.Person.FirstName,
+                LastName = application.Person.LastName,
+                AnnualIncome = application.Person.AnnualIncome,
+                CreditScore = application.Person.CreditScore,
+                LoanAmount = application.LoanAmount,
+                LoanTerm = application.Term.Years,
                 Approved = true,
                 InterestRate = interestRate,
                 MonthlyPayment = monthlyPayment

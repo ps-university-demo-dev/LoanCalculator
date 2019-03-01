@@ -8,6 +8,16 @@ namespace LoanCalculator.Data.InMemory
 {
     public class LoanApplicationResultRepository : ILoanApplicationResultRepository
     {
+
+        public LoanApplicationResultRepository(LoanData data)
+        {
+            _data = data;
+        }
+
+
+        private LoanData _data;
+
+
         public List<LoanApplicationResult> GetLoanApplicationResults()
         {
             throw new NotImplementedException();

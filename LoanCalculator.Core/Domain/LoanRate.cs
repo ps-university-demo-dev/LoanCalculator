@@ -7,6 +7,9 @@ namespace LoanCalculator.Core.Domain
     public class LoanRate
     {
 
+
+        public int LoanRateId { get; set; }
+
         public int LowerCreditScore { get; set; }
 
         public int UpperCreditScore { get; set; }

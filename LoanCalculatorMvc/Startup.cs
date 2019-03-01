@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoanCalculator.Data.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,11 @@ namespace LoanCalculatorMvc
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var connectionString = "DataSource=:memory:";
+            services.ConfigureSqlLiteDatabase(connectionString);
+            services.ConfigureRepositories();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

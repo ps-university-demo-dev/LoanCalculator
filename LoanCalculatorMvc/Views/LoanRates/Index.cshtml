@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LoanCalculator.Core.Domain.LoanRate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LoanRateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LowerCreditScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpperCreditScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterestRate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoanRateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LowerCreditScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpperCreditScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterestRate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
