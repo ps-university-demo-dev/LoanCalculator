@@ -30,6 +30,7 @@ namespace LoanCalculator.Data.EFCore
         public void SavePerson(Person person)
         {
             _context.Persons.Add(person);
+            _context.SaveChanges();
         }
     }
 }

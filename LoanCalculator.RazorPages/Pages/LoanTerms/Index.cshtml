@@ -1,0 +1,33 @@
+﻿@page
+@model LoanCalculator.RazorPages.Pages.LoanTerms.LoanTermsModel
+@{
+    ViewData["Title"] = "LoanTerms";
+}
+
+<h1>Loan Terms</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Years
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LoanTerms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Years)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

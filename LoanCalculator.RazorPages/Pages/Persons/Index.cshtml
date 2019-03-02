@@ -1,0 +1,53 @@
+﻿@page
+@model LoanCalculator.RazorPages.Pages.Persons.IndexModel
+
+@{
+    ViewData["Title"] = "Persons";
+}
+
+<h1>Persons</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Persons[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Persons[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Persons[0].AnnualIncome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Persons[0].CreditScore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Persons) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnnualIncome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreditScore)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.PersonId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.PersonId">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

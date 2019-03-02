@@ -1,0 +1,44 @@
+﻿@page
+@model LoanCalculator.RazorPages.Pages.LoanRatesModel
+@{
+    ViewData["Title"] = "Loan Rates";
+}
+
+<h1>Loan Rates</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Rate ID
+            </th>
+            <th>
+                Low Credit Score
+            </th>
+            <th>
+                Upper Credit Score
+            </th>
+            <th>
+                Interest Rate
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LoanRates)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoanRateId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowerCreditScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpperCreditScore)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterestRate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
