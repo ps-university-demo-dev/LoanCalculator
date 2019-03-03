@@ -17,8 +17,6 @@ namespace LoanCalculator.Data.EFCore
 
         public DbSet<LoanRate> LoanRates { get; set; }
 
-        //public DbSet<LoanTerm> LoanTerms { get; set; }
-
         public DbSet<LoanApplicationResult> LoanApplicationResults { get; set; }
 
 
@@ -30,14 +28,6 @@ namespace LoanCalculator.Data.EFCore
             this.ConfigureLoanApplicationResult(modelBuilder);
             this.SeedData(modelBuilder);
         }
-
-
-        //private void ConfigureLoanTerm(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<LoanTerm>()
-        //        .ToTable("LoanTerms")
-        //        .HasKey(lt => lt.Years);
-        //}
 
         private void ConfigureLoanRate(ModelBuilder modelBuilder)
         {
@@ -58,13 +48,6 @@ namespace LoanCalculator.Data.EFCore
 
         private void SeedData(ModelBuilder modelBuilder)
         {
-
-            //modelBuilder.Entity<LoanTerm>().HasData(
-            //    new LoanTerm() { Name = "10 Year", Years = 10 },
-            //    new LoanTerm() { Name = "15 Year", Years = 15 },
-            //    new LoanTerm() { Name = "25 Year", Years = 20 },
-            //    new LoanTerm() { Name = "30 Year", Years = 30 }
-            //);
 
             modelBuilder.Entity<LoanRate>().HasData(
                 new LoanRate() { LoanRateId = 1, LowerCreditScore = 50, UpperCreditScore = 59, InterestRate = 0.085 },
