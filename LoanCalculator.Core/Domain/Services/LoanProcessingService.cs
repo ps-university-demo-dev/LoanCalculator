@@ -10,17 +10,17 @@ namespace LoanCalculator.Core.Services
     public class LoanProcessingService
     {
 
-        public LoanProcessingService(List<ILoanQualificationRule> rules, ILoanRateRepository loanRateRepository)
-            : this(rules, loanRateRepository.GetLoanRates())
+        public LoanProcessingService(ILoanRateRepository loanRateRepository, List<ILoanQualificationRule> rules)
+            : this(loanRateRepository.GetLoanRates(), rules.ToArray())
         {
 
         }
 
 
-        public LoanProcessingService(List<ILoanQualificationRule> rules, List<LoanRate> rates)
+        public LoanProcessingService(List<LoanRate> rates, params ILoanQualificationRule[] rules)
         {
-            _loanApprovalRules = rules;
             _loanRates = rates;
+            _loanApprovalRules = rules.ToList();
         }
 
 
@@ -49,7 +49,7 @@ namespace LoanCalculator.Core.Services
 
         private double DetermineInterestRate(LoanApplication application)
         {
-            var creditScore = application.Person.CreditScore;
+            var creditScore = application.CreditScore;
             var rate = _loanRates.First(r => creditScore >= r.LowerCreditScore && creditScore <= r.UpperCreditScore);
             return rate.InterestRate;
         }
@@ -62,7 +62,7 @@ namespace LoanCalculator.Core.Services
             double discountFactor = ((Math.Pow((1 + monthlyInterest),  totalPayments)) - 1.0) /
                 (monthlyInterest * Math.Pow((1 + monthlyInterest), totalPayments));
 
-            double monthlyPayment = loanAmount / discountFactor;
+            double monthlyPayment = Math.Round(loanAmount / discountFactor, 2);
             return monthlyPayment;
         }
 

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LoanCalculator.Core.Domain;
+using LoanCalculator.Core.Services;
 using LoanCalculator.Data.EFCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +41,13 @@ namespace LoanCalculator.RazorPages
             services.ConfigureSqlLiteDatabase(connectionString);
             services.ConfigureRepositories();
 
+            var rules = new List<ILoanQualificationRule>()
+            {
+                new CreditScoreLoanApprovalRule(),
+                new LoanSizeLoanApprovalRule(),
+            };
+            services.AddScoped<List<ILoanQualificationRule>>(provider => rules);
+            services.AddScoped<LoanProcessingService, LoanProcessingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

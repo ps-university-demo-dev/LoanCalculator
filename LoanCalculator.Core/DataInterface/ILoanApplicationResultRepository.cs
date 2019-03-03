@@ -10,7 +10,7 @@ namespace LoanCalculator.Core.DataInterface
 
         List<LoanApplicationResult> GetLoanApplicationResults();
 
-
+        LoanApplicationResult GetLoanApplicationResult(int id);
 
         void SaveLoanApplicationResult(LoanApplicationResult loanApplicationResult);
 

@@ -14,7 +14,7 @@ namespace LoanCalculator.Core.Domain
 
         public bool CheckLoanApprovalRule(LoanApplication application)
         {
-            var creditScore = application.Person.CreditScore;
+            var creditScore = application.CreditScore;
 
             switch (creditScore)
             {

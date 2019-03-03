@@ -26,6 +26,12 @@ namespace LoanCalculator.Data.EFCore
         public void SaveLoanApplicationResult(LoanApplicationResult loanApplicationResult)
         {
             _context.LoanApplicationResults.Add(loanApplicationResult);
+            _context.SaveChanges();
+        }
+
+        public LoanApplicationResult GetLoanApplicationResult(int id)
+        {
+            return _context.LoanApplicationResults.FirstOrDefault(r => r.ResultId == id);
         }
     }
 }

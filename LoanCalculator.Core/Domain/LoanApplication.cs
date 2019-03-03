@@ -7,7 +7,14 @@ namespace LoanCalculator.Core.Domain
     public class LoanApplication
     {
 
-        public Person Person { get; set; }
+        public String FirstName { get; set; }
+
+        public String LastName { get; set; }
+
+        public int AnnualIncome { get; set; }
+
+
+        public int CreditScore { get; set; }
 
         public double LoanAmount { get; set; }
 

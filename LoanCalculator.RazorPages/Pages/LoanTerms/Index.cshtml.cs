@@ -12,18 +12,20 @@ namespace LoanCalculator.RazorPages.Pages.LoanTerms
     public class LoanTermsModel : PageModel
     {
 
-        public LoanTermsModel(ILoanTermRepository loanTermRepository) : base()
+        public LoanTermsModel() : base()
         {
-            _loanTermRepository = loanTermRepository;
+            
         }
 
-        private ILoanTermRepository _loanTermRepository;
+        
 
         public List<LoanTerm> LoanTerms { get; private set; }
 
         public void OnGet()
         {
-            LoanTerms = _loanTermRepository.GetLoanTerms();
+            LoanTerms = LoanTerm.LoanTerms.Values
+                .OrderBy(t => t.Years)
+                .ToList() ;
         }
     }
 }

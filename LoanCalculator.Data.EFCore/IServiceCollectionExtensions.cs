@@ -36,8 +36,7 @@ namespace LoanCalculator.Data.EFCore
         public static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<ILoanRateRepository, LoanRateRepository>();
-            services.AddScoped<ILoanTermRepository, LoanTermRepository>();
-            services.AddScoped<IPersonRepository, PersonRepository>();
+            //services.AddScoped<ILoanTermRepository, LoanTermRepository>();
             services.AddScoped<ILoanApplicationResultRepository, LoanApplicationResultRepository>();
         }
 

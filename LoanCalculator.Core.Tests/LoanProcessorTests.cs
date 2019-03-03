@@ -21,11 +21,6 @@ namespace LoanCalculator.Core.Tests
                 new LoanRate() { LowerCreditScore = 90, UpperCreditScore = 100, InterestRate = 0.040 }
             };
 
-
-
-
-
-
         #endregion
 
 
@@ -34,36 +29,47 @@ namespace LoanCalculator.Core.Tests
         [TestMethod]
         public void TestLoanDeniedForLowCreditScore()
         {
-            var loanApprovalRules = new List<ILoanQualificationRule>()
+            // Arrange
+            var application = new LoanApplication()
             {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 50_000,
+                CreditScore = 47,
+                LoanAmount = 250_000,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
                 new CreditScoreLoanApprovalRule(),
                 new LoanSizeLoanApprovalRule()
-            };
+            );
 
-            LoanProcessingService service = new LoanProcessingService(loanApprovalRules, Rates);
 
-            var person = new Person() { PersonId = 1, FirstName = "John", LastName = "Doe", CreditScore = 47, AnnualIncome = 50_000 };
-            var application = new LoanApplication() { Person = person, LoanAmount = 250_000, Term = new LoanTerm() { Name = "30 Year", Years = 30 } };
-
+            // Act
             var result = service.ProcessLoan(application);
 
+            // Assert
             Assert.IsFalse(result.Approved);
         }
 
         [TestMethod]
         public void TestLoanApprovedForHighCreditScore()
         {
-            var loanApprovalRules = new List<ILoanQualificationRule>()
+            var application = new LoanApplication()
             {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 50_000,
+                CreditScore = 77,
+                LoanAmount = 250_000,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
                 new CreditScoreLoanApprovalRule(),
                 new LoanSizeLoanApprovalRule()
-            };
+            );
 
-            LoanProcessingService service = new LoanProcessingService(loanApprovalRules, Rates);
-
-            var person = new Person() { PersonId = 1, FirstName = "John", LastName = "Doe", CreditScore = 77, AnnualIncome = 50_000 };
-            var application = new LoanApplication() { Person = person, LoanAmount = 250_000, Term = new LoanTerm() { Name = "30 Year", Years = 30 } };
-
+            // Act
             var result = service.ProcessLoan(application);
 
             Assert.IsTrue(result.Approved);
@@ -73,19 +79,26 @@ namespace LoanCalculator.Core.Tests
         [TestMethod]
         public void TestLoanHasCorrectInterestRate()
         {
-            var loanApprovalRules = new List<ILoanQualificationRule>()
+            // Arrange
+            var application = new LoanApplication()
             {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 50_000,
+                CreditScore = 73,
+                LoanAmount = 250_000,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
                 new CreditScoreLoanApprovalRule(),
                 new LoanSizeLoanApprovalRule()
-            };
+            );
 
-            LoanProcessingService service = new LoanProcessingService(loanApprovalRules, Rates);
-
-            var person = new Person() { PersonId = 1, FirstName = "John", LastName = "Doe", CreditScore = 77, AnnualIncome = 50_000 };
-            var application = new LoanApplication() { Person = person, LoanAmount = 250_000, Term = new LoanTerm() { Name = "30 Year", Years = 30 } };
-
+            // Act
             var result = service.ProcessLoan(application);
 
+            // Assert
+            Assert.IsNotNull(result.InterestRate, "This loan should be approved and have an interest rate");
             Assert.AreEqual(0.0625, result.InterestRate.Value);
         }
 
@@ -93,20 +106,53 @@ namespace LoanCalculator.Core.Tests
         [TestMethod]
         public void TestLoanHasCorrectPaymentCalculated()
         {
-            var loanApprovalRules = new List<ILoanQualificationRule>()
+            // Arrange
+            var application = new LoanApplication()
             {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 50_000,
+                CreditScore = 73,
+                LoanAmount = 250_000,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
                 new CreditScoreLoanApprovalRule(),
                 new LoanSizeLoanApprovalRule()
-            };
+            );
 
-            LoanProcessingService service = new LoanProcessingService(loanApprovalRules, Rates);
-
-            var person = new Person() { PersonId = 1, FirstName = "John", LastName = "Doe", CreditScore = 77, AnnualIncome = 50_000 };
-            var application = new LoanApplication() { Person = person, LoanAmount = 250_000, Term = new LoanTerm() { Name = "30 Year", Years = 30 } };
-
+            // Act
             var result = service.ProcessLoan(application);
 
-            Assert.AreEqual(1539.29, Math.Round(result.MonthlyPayment.Value, 2));
+            // Assert
+            Assert.IsNotNull(result.MonthlyPayment);
+            Assert.AreEqual(1539.29, result.MonthlyPayment.Value);
+        }
+
+
+        [TestMethod]
+        public void TestLoansOverOneMillionDolalrsShouldBeDenied()
+        {
+            // Arrange
+            var application = new LoanApplication()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 250_000,
+                CreditScore = 95,
+                LoanAmount = 1_000_001,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
+                new CreditScoreLoanApprovalRule(),
+                new LoanSizeLoanApprovalRule()
+            );
+
+            // Act
+            var result = service.ProcessLoan(application);
+
+            // Assert
+            Assert.IsFalse(result.Approved);
         }
 
 

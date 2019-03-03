@@ -21,13 +21,13 @@ namespace LoanCalculator.Core.Domain
 
         public int LoanTerm { get; set; }
 
-        public Boolean Approved { get; private set; }
+        public Boolean Approved { get; set; }
 
-        public String DenialReason { get; private set; }
+        public String DenialReason { get; set; }
 
-        public double? InterestRate { get; private set; }
+        public double? InterestRate { get; set; }
 
-        public double? MonthlyPayment { get; private set; }
+        public double? MonthlyPayment { get; set; }
 
 
 
@@ -35,10 +35,10 @@ namespace LoanCalculator.Core.Domain
         {
             return new LoanApplicationResult()
             {
-                FirstName = application.Person.FirstName,
-                LastName = application.Person.LastName,
-                AnnualIncome = application.Person.AnnualIncome,
-                CreditScore = application.Person.CreditScore,
+                FirstName = application.FirstName,
+                LastName = application.LastName,
+                AnnualIncome = application.AnnualIncome,
+                CreditScore = application.CreditScore,
                 LoanAmount = application.LoanAmount,
                 LoanTerm = application.Term.Years,
                 Approved = false,
@@ -51,10 +51,10 @@ namespace LoanCalculator.Core.Domain
         {
             return new LoanApplicationResult()
             {
-                FirstName = application.Person.FirstName,
-                LastName = application.Person.LastName,
-                AnnualIncome = application.Person.AnnualIncome,
-                CreditScore = application.Person.CreditScore,
+                FirstName = application.FirstName,
+                LastName = application.LastName,
+                AnnualIncome = application.AnnualIncome,
+                CreditScore = application.CreditScore,
                 LoanAmount = application.LoanAmount,
                 LoanTerm = application.Term.Years,
                 Approved = true,

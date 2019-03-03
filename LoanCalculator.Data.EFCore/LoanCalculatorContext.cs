@@ -17,9 +17,7 @@ namespace LoanCalculator.Data.EFCore
 
         public DbSet<LoanRate> LoanRates { get; set; }
 
-        public DbSet<LoanTerm> LoanTerms { get; set; }
-
-        public DbSet<Person> Persons { get; set; }
+        //public DbSet<LoanTerm> LoanTerms { get; set; }
 
         public DbSet<LoanApplicationResult> LoanApplicationResults { get; set; }
 
@@ -27,20 +25,19 @@ namespace LoanCalculator.Data.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            this.ConfigureLoanTerm(modelBuilder);
+            //this.ConfigureLoanTerm(modelBuilder);
             this.ConfigureLoanRate(modelBuilder);
-            this.ConfigurePerson(modelBuilder);
             this.ConfigureLoanApplicationResult(modelBuilder);
             this.SeedData(modelBuilder);
         }
 
 
-        private void ConfigureLoanTerm(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<LoanTerm>()
-                .ToTable("LoanTerms")
-                .HasKey(lt => lt.Years);
-        }
+        //private void ConfigureLoanTerm(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<LoanTerm>()
+        //        .ToTable("LoanTerms")
+        //        .HasKey(lt => lt.Years);
+        //}
 
         private void ConfigureLoanRate(ModelBuilder modelBuilder)
         {
@@ -49,13 +46,6 @@ namespace LoanCalculator.Data.EFCore
                 .HasKey(lt => lt.LoanRateId);
         }
 
-
-        private void ConfigurePerson(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Person>()
-                .ToTable("Persons")
-                .HasKey(lt => lt.PersonId);
-        }
 
 
         private void ConfigureLoanApplicationResult(ModelBuilder modelBuilder)
@@ -69,29 +59,29 @@ namespace LoanCalculator.Data.EFCore
         private void SeedData(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<LoanTerm>().HasData(
-                new LoanTerm() { Name = "10 Year", Years = 10 },
-                new LoanTerm() { Name = "15 Year", Years = 15 },
-                new LoanTerm() { Name = "25 Year", Years = 20 },
-                new LoanTerm() { Name = "30 Year", Years = 30 }
-            );
+            //modelBuilder.Entity<LoanTerm>().HasData(
+            //    new LoanTerm() { Name = "10 Year", Years = 10 },
+            //    new LoanTerm() { Name = "15 Year", Years = 15 },
+            //    new LoanTerm() { Name = "25 Year", Years = 20 },
+            //    new LoanTerm() { Name = "30 Year", Years = 30 }
+            //);
 
             modelBuilder.Entity<LoanRate>().HasData(
-                new LoanRate() { LoanRateId = 1, LowerCreditScore = 50, UpperCreditScore = 59, InterestRate = 8.5 },
-                new LoanRate() { LoanRateId = 2, LowerCreditScore = 60, UpperCreditScore = 69, InterestRate = 7.5 },
-                new LoanRate() { LoanRateId = 3, LowerCreditScore = 70, UpperCreditScore = 79, InterestRate = 6.25 },
-                new LoanRate() { LoanRateId = 4, LowerCreditScore = 80, UpperCreditScore = 89, InterestRate = 5.25 },
-                new LoanRate() { LoanRateId = 5, LowerCreditScore = 90, UpperCreditScore = 100, InterestRate = 4.0 }
+                new LoanRate() { LoanRateId = 1, LowerCreditScore = 50, UpperCreditScore = 59, InterestRate = 0.085 },
+                new LoanRate() { LoanRateId = 2, LowerCreditScore = 60, UpperCreditScore = 69, InterestRate = 0.075 },
+                new LoanRate() { LoanRateId = 3, LowerCreditScore = 70, UpperCreditScore = 79, InterestRate = 0.0625 },
+                new LoanRate() { LoanRateId = 4, LowerCreditScore = 80, UpperCreditScore = 89, InterestRate = 0.0525 },
+                new LoanRate() { LoanRateId = 5, LowerCreditScore = 90, UpperCreditScore = 100, InterestRate = 0.04 }
             );
 
-            modelBuilder.Entity<Person>().HasData(
-                new Person() { PersonId = 1, FirstName = "Andrew", LastName = "Smith", CreditScore = 89, AnnualIncome = 100000 },
-                new Person() { PersonId = 2, FirstName = "Maggie", LastName = "Cohen", CreditScore = 72, AnnualIncome = 80000 },
-                new Person() { PersonId = 3, FirstName = "Bryan", LastName = "Boyd", CreditScore = 44, AnnualIncome = 55000 },
-                new Person() { PersonId = 4, FirstName = "Martha", LastName = "Fletcher", CreditScore = 87, AnnualIncome = 125000 },
-                new Person() { PersonId = 5, FirstName = "Stephen", LastName = "Wright", CreditScore = 65, AnnualIncome = 75000 },
-                new Person() { PersonId = 6, FirstName = "Marie", LastName = "Thomas", CreditScore = 58, AnnualIncome = 80000 }
-            );
+            modelBuilder.Entity<LoanApplicationResult>().HasData(
+                new LoanApplicationResult() { ResultId = 1, FirstName = "John", LastName = "Smith", AnnualIncome = 75_000, CreditScore = 79, Approved = true, InterestRate = 0.0625, LoanAmount = 125_000, MonthlyPayment = 769.65, LoanTerm = 30},
+                new LoanApplicationResult() { ResultId = 2, FirstName = "Mary", LastName = "Jones", AnnualIncome = 60_000, CreditScore = 68, Approved = true, InterestRate = 0.075, LoanAmount = 135_000, MonthlyPayment = 934.94, LoanTerm = 30 },
+                new LoanApplicationResult() { ResultId = 3, FirstName = "Andy", LastName = "Anderson", AnnualIncome = 100_000, CreditScore = 46, Approved = false, DenialReason = "Credit Score", LoanTerm = 30 },
+                new LoanApplicationResult() { ResultId = 4, FirstName = "Sally", LastName = "Johnson", AnnualIncome = 125_000, CreditScore = 88, Approved = true, InterestRate = 0.0525, LoanAmount = 250_000, MonthlyPayment = 1684.61, LoanTerm = 20}
+
+
+                );
         }
 
     }

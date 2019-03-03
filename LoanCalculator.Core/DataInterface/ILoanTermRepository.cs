@@ -1,17 +1,17 @@
-﻿using LoanCalculator.Core.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using LoanCalculator.Core.Domain;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-namespace LoanCalculator.Core.DataInterface
-{
-    public interface ILoanTermRepository
-    {
+//namespace LoanCalculator.Core.DataInterface
+//{
+//    public interface ILoanTermRepository
+//    {
 
-        List<LoanTerm> GetLoanTerms();
+//        List<LoanTerm> GetLoanTerms();
 
-        LoanTerm GetLoanTerm(int loanTerm);
+//        LoanTerm GetLoanTerm(int loanTerm);
 
 
-    }
-}
+//    }
+//}

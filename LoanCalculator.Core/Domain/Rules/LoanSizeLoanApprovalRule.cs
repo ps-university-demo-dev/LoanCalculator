@@ -27,7 +27,7 @@ namespace LoanCalculator.Core.Domain
                     return true;
                 case double n when (n > 1_000_000 ):
                     // Do not issue loans over $1,000,000
-                    return true;
+                    return false;
                 default:
                     return false;
             }

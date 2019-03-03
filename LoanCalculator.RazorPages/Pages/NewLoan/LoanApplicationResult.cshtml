@@ -1,0 +1,43 @@
+﻿@page
+@model LoanCalculator.RazorPages.Pages.NewLoan.LoanApplicationResultModel
+@{
+    ViewData["Title"] = "LoanApplicationResult";
+}
+
+<h1>Loan Application Result</h1>
+
+
+<div>
+    <div class="row">
+        <div class="col-md-3">Name</div>
+        <div class="col-md-3">@Model.Result.FirstName  @Model.Result.LastName</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Loan Amount</div>
+        <div class="col-md-3">@Model.Result.LoanAmount.ToString("c")</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Loan Term</div>
+        <div class="col-md-3">@Model.Result.LoanTerm</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Status</div>
+        <div class="col-md-3">@((Model.Result.Approved) ? "Approved" : "Denied")</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Reason</div>
+        <div class="col-md-3">@Model.Result.DenialReason</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Monthly Payment</div>
+        <div class="col-md-3">@Model.Result.MonthlyPayment?.ToString("c")</div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">Interest Rate</div>
+        <div class="col-md-3">@Model.Result.InterestRate?.ToString("0%")</div>
+    </div>
+
+    
+    <a class="btn-primary btn" style="margin-top: 25px" asp-area="" asp-page="/Index">Return to List</a>
+</div>
+

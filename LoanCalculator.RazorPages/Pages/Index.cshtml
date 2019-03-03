@@ -4,7 +4,30 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+    <table style="width: 80%" class="table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Loan Amount</th>
+                <th>Status</th>
+                <th>Reason</th>
+                <th>Interest Rate</th>
+                <th>Payment</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.LoanApplicationResults)
+        {
+    <tr>
+        <td>@item.ResultId</td>
+        <td>@item.FirstName  @item.LastName</td>
+        <td class="text-right">@item.LoanAmount.ToString("c")</td>
+        <td class="text-center">@(item.Approved ? "Approved" : "Denied")</td>
+        <td>@item.DenialReason</td>
+        <td class="text-right">@item.InterestRate?.ToString("0.00%")</td>
+        <td class="text-right">@item.MonthlyPayment?.ToString("c")</td>
+    </tr>
+        }
+        </table>
+
