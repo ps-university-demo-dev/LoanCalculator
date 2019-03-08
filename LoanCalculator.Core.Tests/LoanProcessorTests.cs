@@ -155,6 +155,29 @@ namespace LoanCalculator.Core.Tests
             Assert.IsFalse(result.Approved);
         }
 
+        [TestMethod]
+        public void TestLoansOverFourTimesIncomeShouldBeDenied()
+        {
+            // Arrange
+            var application = new LoanApplication()
+            {
+                FirstName = "John",
+                LastName = "Doe",
+                AnnualIncome = 50_000,
+                CreditScore = 795,
+                LoanAmount = 300_000,
+                Term = LoanTerm.YEARS_30
+            };
+            LoanProcessingService service = new LoanProcessingService(Rates,
+                new IncomeApprovalRule()
+            );
+
+            // Act
+            var result = service.ProcessLoan(application);
+
+            // Assert
+            Assert.IsFalse(result.Approved);
+        }
 
     }
 }
