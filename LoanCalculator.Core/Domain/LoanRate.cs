@@ -17,5 +17,8 @@ namespace LoanCalculator.Core.Domain
 
         public double InterestRate { get; set; }
 
+        public int LoanTypeId { get; set; }
+
+        public LoanType LoanType { get; set; }
     }
 }

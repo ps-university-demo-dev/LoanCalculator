@@ -9,6 +9,8 @@ namespace LoanCalculator.Core.Services
 {
     public class LoanProcessingService
     {
+        private List<ILoanQualificationRule> _loanApprovalRules;
+        private List<LoanRate> _loanRates;
 
         public LoanProcessingService(ILoanRateRepository loanRateRepository, List<ILoanQualificationRule> rules)
             : this(loanRateRepository.GetLoanRates(), rules.ToArray())
@@ -22,11 +24,6 @@ namespace LoanCalculator.Core.Services
             _loanRates = rates;
             _loanApprovalRules = rules.ToList();
         }
-
-
-        private List<ILoanQualificationRule> _loanApprovalRules;
-        private List<LoanRate> _loanRates;
-
 
 
         public LoanApplicationResult ProcessLoan(LoanApplication application)

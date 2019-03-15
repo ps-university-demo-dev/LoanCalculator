@@ -3,31 +3,68 @@
 @{
     ViewData["Title"] = "LoanTerms";
 }
-
-<h1>Loan Terms</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Years
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.LoanTerms)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Years)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Loan Rates</h2>
+        <table class="table table-responsive table-bordered, table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Low Credit Score
+                    </th>
+                    <th>
+                        Upper Credit Score
+                    </th>
+                    <th>
+                        Interest Rate
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LoanRates)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LowerCreditScore)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpperCreditScore)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InterestRate)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <h2>Loan Terms</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Years
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LoanTerms)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Years)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

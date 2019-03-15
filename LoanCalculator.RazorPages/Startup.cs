@@ -45,6 +45,7 @@ namespace LoanCalculator.RazorPages
             {
                 new CreditScoreLoanApprovalRule(),
                 new LoanSizeLoanApprovalRule(),
+                new EmploymentApprovalRule()
             };
             services.AddScoped<List<ILoanQualificationRule>>(provider => rules);
             services.AddScoped<LoanProcessingService, LoanProcessingService>();
