@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label asp-for="TermYears" class="control-label"></label>
-                <select asp-for="TermYears" asp-items="Model.LoanTerms">
+                <select class="form-control" asp-for="TermYears" asp-items="Model.LoanTerms">
                     <option value="">Pick one</option>
                 </select>
                 <span asp-validation-for="LoanApplication.Term" class="text-danger"></span>
