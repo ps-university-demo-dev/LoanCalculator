@@ -25,6 +25,9 @@ namespace LoanCalculator.Core.Domain
         [DisplayName("Loan Amount")]
         public double LoanAmount { get; set; }
 
+        [DisplayName("Term Years")]
+        public double TermYears { get; set; }
+
         [DisplayName("Term")]
         public LoanTerm Term { get; set; }
 

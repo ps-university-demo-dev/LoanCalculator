@@ -18,9 +18,4 @@
     <ProjectReference Include="..\LoanCalculator.Data.EFCore\LoanCalculator.Data.EFCore.csproj" />
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>

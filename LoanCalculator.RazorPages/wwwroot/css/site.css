@@ -68,6 +68,14 @@ body {
     display: inline-block;
 }
 
+#loans tr {
+    cursor: pointer;
+}
+
+#loans tr:hover {
+    background-color: #ddd;
+}
+
 .dt-select {
     max-width: 76px;
     display: inline;
@@ -75,4 +83,8 @@ body {
 
 .dataTables_length label {
     min-width: 350px;
+}
+
+#details {
+    margin-top: 47px;
 }

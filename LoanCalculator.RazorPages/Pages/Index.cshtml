@@ -14,7 +14,7 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12">
-                <table id="loans" class="table table-striped table-responsive-lg">
+                <table class="table table-striped table-responsive-lg">
                     <thead class="text-light thead-light">
                         <tr>
                             <th>ID</th>
@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.LoanApplicationResults.Take(4))
+                        @foreach (var item in Model.LoanApplicationResults)
                         {
                             <tr>
                                 <td>@item.ResultId</td>
@@ -52,35 +52,29 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Current Loan Rates
+                        Current Loan Terms
                     </div>
                     <div class="card-body">
-                        <table class="table table-responsive table-striped">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>
-                                        Low Credit Score
+                                        Years
                                     </th>
                                     <th>
-                                        Upper Credit Score
-                                    </th>
-                                    <th>
-                                        Interest Rate
+                                        Months
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.LoanRates)
+                                @foreach (var item in Model.LoanTerms)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.LowerCreditScore)
+                                            @Html.DisplayFor(modelItem => item.Years)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.UpperCreditScore)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.InterestRate)
+                                            @Html.DisplayFor(modelItem => item.TotalPayments)
                                         </td>
                                     </tr>
                                 }
@@ -95,7 +89,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Current Loan Terms
+                        Current Loan Rates
                     </div>
                     <div class="card-body">
                         <table class="table table-responsive table-striped">

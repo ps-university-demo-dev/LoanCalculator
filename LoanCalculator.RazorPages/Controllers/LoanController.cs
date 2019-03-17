@@ -31,5 +31,12 @@ namespace LoanCalculator.RazorPages.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("loans/{id}")]
+        public IActionResult Index(int id)
+        {
+            var loan = this.repo.GetLoanApplicationResult(id);
+            return View(loan);
+        }
     }
 }

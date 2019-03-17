@@ -17,13 +17,12 @@ namespace LoanCalculator.RazorPages.Pages.NewLoan
 
         public CreateModel(LoanProcessingService loanProcessingService,  ILoanApplicationResultRepository resultRepository)
         {
-            _loanProcessingService = loanProcessingService;            
-            //_loanTermRepository = loanTermRepository;
+            _loanProcessingService = loanProcessingService;
             _resultRepository = resultRepository;
         }
 
         private LoanProcessingService _loanProcessingService;
-        //private ILoanTermRepository _loanTermRepository;
+
         private ILoanApplicationResultRepository _resultRepository;
 
         public IList<SelectListItem> Persons { get; private set; }

@@ -11,6 +11,9 @@ namespace LoanCalculator.RazorPages.Pages
 {
     public class IndexModel : PageModel
     {
+        private ILoanApplicationResultRepository _loanResultRepository;
+
+        private ILoanRateRepository _loanRateRepository;
 
         public IndexModel(ILoanApplicationResultRepository loanResultRepository, ILoanRateRepository rateRepo)
         {
@@ -18,9 +21,7 @@ namespace LoanCalculator.RazorPages.Pages
             _loanRateRepository = rateRepo;
         }
 
-
-        private ILoanApplicationResultRepository _loanResultRepository;
-        private ILoanRateRepository _loanRateRepository;
+        public List<LoanTerm> LoanTerms { get; set; }
 
         public List<LoanApplicationResult> LoanApplicationResults { get; set; }
 
@@ -28,8 +29,11 @@ namespace LoanCalculator.RazorPages.Pages
 
         public void OnGet()
         {
-            LoanApplicationResults = _loanResultRepository.GetLoanApplicationResults();
-            LoanRates = _loanRateRepository.GetLoanRates().Take(3).ToList();
+            LoanApplicationResults = _loanResultRepository.GetLoanApplicationResults().Take(5).ToList();
+            LoanRates = _loanRateRepository.GetLoanRates();
+            LoanTerms = LoanTerm.LoanTerms.Values
+                .OrderBy(t => t.Years)
+                .ToList();
         }
     }
 }
