@@ -11,18 +11,6 @@ namespace LoanCalculator.RazorPages.Pages
 {
     public class LoanHistoryModel : PageModel
     {
-        public LoanHistoryModel(ILoanApplicationResultRepository loanResultRepository)
-        {
-            _loanResultRepository = loanResultRepository;
-        }
-
-        private ILoanApplicationResultRepository _loanResultRepository;
-
-        public List<LoanApplicationResult> LoanApplicationResults { get; set; }
-
-        public void OnGet()
-        {
-            LoanApplicationResults = _loanResultRepository.GetLoanApplicationResults();
-        }
+        public void OnGet() { }
     }
 }

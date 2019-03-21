@@ -9,21 +9,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using LoanCalculator.RazorPages.Util;
+using CreditCheck;
 
 namespace LoanCalculator.RazorPages.Pages.NewLoan
 {
     public class CreateModel : PageModel
     {
+        private LoanProcessingService _loanProcessingService;
+
+        private ILoanApplicationResultRepository _resultRepository;
 
         public CreateModel(LoanProcessingService loanProcessingService,  ILoanApplicationResultRepository resultRepository)
         {
             _loanProcessingService = loanProcessingService;
             _resultRepository = resultRepository;
         }
-
-        private LoanProcessingService _loanProcessingService;
-
-        private ILoanApplicationResultRepository _resultRepository;
 
         public IList<SelectListItem> Persons { get; private set; }
 
@@ -46,12 +46,14 @@ namespace LoanCalculator.RazorPages.Pages.NewLoan
             return Page();
         }
 
-
-
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
+                LoanTerms = LoanTerm.LoanTerms.Values
+                    .OrderBy(t => t.Years)
+                    .ToSelectList(t => t.Years.ToString(), t => t.Name);
+
                 return Page();
             }
 
@@ -60,7 +62,6 @@ namespace LoanCalculator.RazorPages.Pages.NewLoan
 
             var result = _loanProcessingService.ProcessLoan(LoanApplication);
             _resultRepository.SaveLoanApplicationResult(result);
-
 
             return RedirectToPage($"./LoanApplicationResult", new { id = result.ResultId });
         }

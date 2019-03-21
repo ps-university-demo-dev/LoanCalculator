@@ -30,7 +30,7 @@
                     Amount:
                 </td>
                 <td>
-                    @Model.LoanAmount.ToString("c")
+                    @Math.Round(Model.LoanAmount, 2).ToString("c")
                 </td>
             </tr>
             <tr>
@@ -73,7 +73,15 @@
                     Interest Rate:
                 </td>
                 <td>
-                    @Model.InterestRate?.ToString("0%")
+                    @{ 
+                        var label = "NA";
+                        if(Model.InterestRate != null)
+                        {
+                            var interest = Model.InterestRate * 100;
+                            label = Math.Round(interest.Value, 1).ToString("0.00") + "%";
+                        }
+                    }
+                    @label
                 </td>
             </tr>
         </tbody>

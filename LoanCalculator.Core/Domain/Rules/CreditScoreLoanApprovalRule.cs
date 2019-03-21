@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoanCalculator.Core.DataInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,9 @@ namespace LoanCalculator.Core.Domain
 
             switch (creditScore)
             {
-                case int n when (n <= 50):
+                case int n when (n <= 500):
                     return false;                  
-                case int n when (n > 50):
+                case int n when (n > 500 && n < 850):
                     return true;
                 default:
                     return false;

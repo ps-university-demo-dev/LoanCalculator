@@ -6,7 +6,7 @@
 
 <h1 class="title display-4">Create a New Loan</h1>
 <p class="lead">
-    Here you can create a new loan. Applications are automatically processed and may be rejected for a variety of reasons.  Contact your loan officer for any unexpected denials.
+    This form allows you to create a new loan. Applications are automatically processed and may be rejected for a variety of reasons.  Contact your administrator for any unexpected denials.
 </p>
 <hr />
 <div class="row">
@@ -48,6 +48,20 @@
                 <span asp-validation-for="LoanApplication.Term" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @{ 
+                    var items = new List<SelectListItem>() {
+                        new SelectListItem() { Value = "Standard", Text = "Standard" },
+                        new SelectListItem() { Value = "Premiere", Text = "Premiere" },
+                        new SelectListItem() { Value = "Medical", Text = "Medical" }
+                    };
+                }
+                <label asp-for="LoanApplication.ApplicantType" class="control-label"></label>
+                <select class="form-control" asp-for="LoanApplication.ApplicantType" asp-items="items">
+                    <option value="">Pick one</option>
+                </select>
+                <span asp-validation-for="LoanApplication.Term" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="LoanApplication.LoanAmount" class="control-label"></label>
                 <input asp-for="LoanApplication.LoanAmount" class="form-control" />
                 <span asp-validation-for="LoanApplication.LoanAmount" class="text-danger"></span>
@@ -67,7 +81,7 @@
                 <p class="card-text">Every loan application is unique, and our system uses advanced algorithms to approve or deny alone.  However, here are some general tips to keep in mind.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Loans cannot be larger than the applicant's annula income.</li>
+                <li class="list-group-item">Loans cannot be larger than the applicant's annual income.</li>
                 <li class="list-group-item">Rates and terms can vary in real time.</li>
                 <li class="list-group-item">Credit scores can impact interest rates.</li>
                 <li class="list-group-item">Larger loans require employment history.</li>
@@ -82,7 +96,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="/LoanHistory/Index">Back to List</a>
 </div>
 
 @section Scripts {

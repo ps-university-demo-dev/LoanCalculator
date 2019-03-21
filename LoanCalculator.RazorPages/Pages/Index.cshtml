@@ -47,49 +47,46 @@
         <div class="row clearfix">
             <div class="col-md-12">
                 <hr />
-                <h2 class="title display-4">Rates and Terms</h2>
+                <h2 class="title display-4">Current Loan Rates</h2>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Current Loan Terms
+                        The Market Rates
                     </div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>
-                                        Years
+                                        Loan Type
                                     </th>
                                     <th>
-                                        Months
+                                        Rate
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.LoanTerms)
+                                @foreach (var item in Model.MarketRates)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Years)
+                                            @item.Label
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TotalPayments)
+                                            @item.MinRate
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link float-right">View all rates</a>
-                    </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Current Loan Rates
+                        Our Rates
                     </div>
                     <div class="card-body">
                         <table class="table table-responsive table-striped">
@@ -124,9 +121,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link float-right">View all terms</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -152,5 +146,7 @@
                 <a href="#" class="card-link float-right">Create a loan</a>
             </div>
         </div>
+        <br />
+        
     </div>
 </div>
