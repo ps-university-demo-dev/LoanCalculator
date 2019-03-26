@@ -57,8 +57,7 @@ namespace LoanCalculator.RazorPages.Pages.NewLoan
                 return Page();
             }
 
-            var loanTerm = LoanTerm.GetLoanTerm(TermYears);           
-            LoanApplication.Term = loanTerm;
+            LoanApplication.Term = LoanTerm.GetLoanTerm(TermYears);
 
             var result = _loanProcessingService.ProcessLoan(LoanApplication);
             _resultRepository.SaveLoanApplicationResult(result);

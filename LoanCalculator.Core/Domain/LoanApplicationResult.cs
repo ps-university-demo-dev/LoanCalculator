@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoanCalculator.Core.DataInterface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,14 +26,22 @@ namespace LoanCalculator.Core.Domain
 
         public String DenialReason { get; set; }
 
+        public string ApplicantType { get; set; }
+
         public double? InterestRate { get; set; }
 
         public double? MonthlyPayment { get; set; }
 
 
 
-        public static LoanApplicationResult CreateDeniedResult(LoanApplication application, String denialReason)
+        public static LoanApplicationResult CreateDeniedResult(LoanApplication application, IEnumerable<ILoanQualificationRule> failedRule)
         {
+            var reason = "";
+            foreach(var rule in failedRule)
+            {
+                reason += rule.RuleName + " ";
+            }
+
             return new LoanApplicationResult()
             {
                 FirstName = application.FirstName,
@@ -42,7 +51,8 @@ namespace LoanCalculator.Core.Domain
                 LoanAmount = application.LoanAmount,
                 LoanTerm = application.Term.Years,
                 Approved = false,
-                DenialReason = denialReason
+                DenialReason = reason,
+                ApplicantType = application.ApplicantType
             };
         }
 

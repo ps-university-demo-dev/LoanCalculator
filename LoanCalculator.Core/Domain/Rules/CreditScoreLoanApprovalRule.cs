@@ -15,17 +15,8 @@ namespace LoanCalculator.Core.Domain
 
         public bool CheckLoanApprovalRule(LoanApplication application)
         {
-            var creditScore = application.CreditScore;
+            return application.CreditScore > 500;
 
-            switch (creditScore)
-            {
-                case int n when (n <= 500):
-                    return false;                  
-                case int n when (n > 500 && n < 850):
-                    return true;
-                default:
-                    return false;
-            }
         }
     }
 }

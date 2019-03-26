@@ -27,11 +27,11 @@ namespace LoanCalculator.Core.Services
 
         public LoanApplicationResult ProcessLoan(LoanApplication application)
         {
-            // Check for loan qualification
-            var failingRule = _loanApprovalRules.FirstOrDefault(rule => rule.CheckLoanApprovalRule(application) == false);
-            if (failingRule != null)
+            // Check loan qualification rules
+            var failingRules = _loanApprovalRules.Where(rule => rule.CheckLoanApprovalRule(application) == false).ToList();
+            if (failingRules.Count > 0)
             {
-                var result = LoanApplicationResult.CreateDeniedResult(application, failingRule.RuleName);
+                var result = LoanApplicationResult.CreateDeniedResult(application, failingRules);
                 return result;
             }
 
@@ -46,20 +46,14 @@ namespace LoanCalculator.Core.Services
         private double DetermineInterestRate(LoanApplication application)
         {
             var creditScore = application.CreditScore;
-            var interestRate = _loanRates.FirstOrDefault(r => creditScore >= r.LowerCreditScore && creditScore <= r.UpperCreditScore).InterestRate;
+            var rate = _loanRates.FirstOrDefault(r => creditScore >= r.LowerCreditScore && creditScore <= r.UpperCreditScore);
 
-            // Make sure their rate is at least as good as the market rate
-            //var adjustedRate = LoanHelper.GetAdjustedMarketRate(application.CreditScore, application.AnnualIncome, application.LoanAmount, interestRate);
-
-            //if(adjustedRate.AdjustmentAmount > 0)
-            //{
-            //    interestRate = adjustedRate.RecommendedRate;
-            //}
+            var interestRate = rate.InterestRate;
 
             // Premiere bankers discount
             if(application.ApplicantType.ToLower() == "premiere")
             {
-                return interestRate - 0.01;
+                interestRate += 0.1;
             }
 
             return interestRate;
