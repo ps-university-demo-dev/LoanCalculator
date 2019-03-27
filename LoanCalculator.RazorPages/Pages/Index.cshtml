@@ -74,7 +74,7 @@
                                             @item.Label
                                         </td>
                                         <td>
-                                            @item.MinRate
+                                            @String.Format("{0:P2}.", item.MinRate)
                                         </td>
                                     </tr>
                                 }
@@ -114,7 +114,7 @@
                                             @Html.DisplayFor(modelItem => item.UpperCreditScore)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.InterestRate)
+                                            @String.Format("{0:P2}.", item.InterestRate)
                                         </td>
                                     </tr>
                                 }
@@ -132,12 +132,12 @@
             </div>
             <img src="~/images/grow.jpg" class="card-img-top">
             <div class="card-body">
-                <h5 class="card-title">Some quick stats...</h5>
+                <h5 class="card-title">Some quick weekly stats...</h5>
                 <h6 class="card-subtitle mb-2 text-muted">All thanks to our hard working team. Keep it up!</h6>
                 <ul class="list-group">
                     <li class="list-group-item"><span class="badge badge-secondary">25</span> approvals</li>
                     <li class="list-group-item"><span class="badge badge-secondary">15</span> denials</li>
-                    <li class="list-group-item"><span class="badge badge-secondary">1.2%</span> average interest rate</li>
+                    <li class="list-group-item"><span class="badge badge-secondary">3.2%</span> average interest rate</li>
                     <li class="list-group-item"><span class="badge badge-secondary">10%</span> growth in Q1</li>
                 </ul>
 

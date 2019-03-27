@@ -6,22 +6,22 @@ namespace LoanCalculator.RazorPages.Controllers
 {
     public class LoanController : Controller
     {
-        private ILoanApplicationResultRepository repo;
+        private ILoanApplicationResultRepository loanApplicationRepo;
 
         public LoanController(ILoanApplicationResultRepository repo)
         {
-            this.repo = repo;
+            this.loanApplicationRepo = repo;
         }
 
         [HttpGet("loans")]
-        public IActionResult Index(int start, int length = 2, int draw = 1)
+        public IActionResult Index(int start, int length = 2)
         {
-            var loanResults = this.repo.GetLoanApplicationResults();
+            var loanResults = this.loanApplicationRepo.GetLoanApplicationResults();
             var totalRecords = loanResults.Count;
 
-            loanResults = loanResults.Skip(start).Take(length).ToList();
+            loanResults = loanResults.Take(length).ToList();
 
-            var response = new { draw = draw, recordsFiltered = totalRecords, recordsTotal = totalRecords, data = loanResults };
+            var response = new { recordsFiltered = totalRecords, recordsTotal = totalRecords, data = loanResults };
 
             return Ok(response);
         }
@@ -29,7 +29,7 @@ namespace LoanCalculator.RazorPages.Controllers
         [HttpGet("loans/{id}")]
         public IActionResult Index(int id)
         {
-            var loan = this.repo.GetLoanApplicationResult(id);
+            var loan = this.loanApplicationRepo.GetLoanApplicationResult(id);
             return View(loan);
         }
     }

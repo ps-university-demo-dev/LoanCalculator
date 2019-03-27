@@ -15,8 +15,7 @@ namespace LoanCalculator.Core.Domain
 
         public bool CheckLoanApprovalRule(LoanApplication application)
         {
-            return application.CreditScore > 500;
-
+            return application.CreditScore > 300;
         }
     }
 }

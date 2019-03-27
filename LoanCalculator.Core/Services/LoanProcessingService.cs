@@ -28,8 +28,8 @@ namespace LoanCalculator.Core.Services
         public LoanApplicationResult ProcessLoan(LoanApplication application)
         {
             // Check loan qualification rules
-            var failingRules = _loanApprovalRules.Where(rule => rule.CheckLoanApprovalRule(application) == false).ToList();
-            if (failingRules.Count > 0)
+            var failingRules = _loanApprovalRules.FirstOrDefault(rule => rule.CheckLoanApprovalRule(application) == false);
+            if (failingRules != null)
             {
                 var result = LoanApplicationResult.CreateDeniedResult(application, failingRules);
                 return result;
@@ -48,15 +48,13 @@ namespace LoanCalculator.Core.Services
             var creditScore = application.CreditScore;
             var rate = _loanRates.FirstOrDefault(r => creditScore >= r.LowerCreditScore && creditScore <= r.UpperCreditScore);
 
-            var interestRate = rate.InterestRate;
-
             // Premiere bankers discount
             if(application.ApplicantType.ToLower() == "premiere")
             {
-                interestRate += 0.1;
+                return rate.InterestRate += 0.1;
             }
 
-            return interestRate;
+            return rate.InterestRate;
         }
 
 
@@ -70,7 +68,5 @@ namespace LoanCalculator.Core.Services
             double monthlyPayment = Math.Round(loanAmount / discountFactor, 2);
             return monthlyPayment;
         }
-
-
     }
 }

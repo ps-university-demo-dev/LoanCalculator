@@ -46,8 +46,7 @@ namespace LoanCalculator.RazorPages.Pages
             }
             else
             {
-                // Simulate 3rd party library that only works in prod
-                MarketRates = LoanHelper.GetMarketRates();
+                // Todo: Simulate 3rd party library that only works in prod
             }
         }
 
