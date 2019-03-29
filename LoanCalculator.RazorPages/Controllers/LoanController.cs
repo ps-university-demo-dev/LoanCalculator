@@ -19,9 +19,12 @@ namespace LoanCalculator.RazorPages.Controllers
             var loanResults = this.loanApplicationRepo.GetLoanApplicationResults();
             var totalRecords = loanResults.Count;
 
-            loanResults = loanResults.Take(length).ToList();
+            var filteredLoanResults = loanResults.Skip(start).Take(length).ToList();
 
-            var response = new { recordsFiltered = totalRecords, recordsTotal = totalRecords, data = loanResults };
+            var response = new {
+                recordsFiltered = totalRecords,
+                recordsTotal = totalRecords, data = filteredLoanResults
+            };
 
             return Ok(response);
         }
